@@ -1,0 +1,268 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>From Jay ♡</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- FLOATING HEARTS -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- ================= PAGE 1 ================= -->
+
+    <section class="page hero-page active" id="page1">
+
+        <div class="hero-overlay"></div>
+
+        <div class="little-note">
+            Not just a crush...<br>
+            It's you. <span>♡</span>
+        </div>
+
+        <div class="hero-content">
+
+            <h1 class="main-title">
+                From Jay <span>♡</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                A special message for someone very special...
+            </p>
+
+            <div class="tiny-heart">♥</div>
+
+            <button class="main-button" id="startButton">
+                Are you HER? <span>→</span>
+            </button>
+
+        </div>
+
+        <div class="hero-polaroid">
+            <img src="polaroid.jpg" alt="A special photograph">
+            <p>You... ♡</p>
+        </div>
+
+        <img class="hero-flowers" src="flowers.jpg" alt="Decorative flowers">
+
+    </section>
+
+
+    <!-- ================= PAGE 2 ================= -->
+
+    <section class="page question-page" id="page2">
+
+        <img class="question-roses" src="roses.jpg" alt="Dark red roses">
+
+        <button class="back-button" id="backToPage1">
+            ← Back
+        </button>
+
+        <div class="question-content">
+
+            <p class="question-title">
+                Are you sure you're
+            </p>
+
+            <h2>HER?</h2>
+
+            <div class="question-heart">♡</div>
+
+            <div class="answer-buttons">
+
+                <button class="yes-button" id="yesButton">
+                    ♥ &nbsp; Yes
+                </button>
+
+                <button class="no-button" id="noButton">
+                    × &nbsp; No
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PAGE 3 ================= -->
+
+    <section class="page letter-page" id="page3">
+
+        <img class="letter-roses" src="roses.jpg" alt="Dark rose background">
+
+        <button class="back-button" id="backToPage2">
+            ← Back
+        </button>
+
+        <div class="letter-layout">
+
+            <!-- LOVE LETTER -->
+
+            <div class="letter-content">
+
+                <h2 class="letter-heading">
+                    To my HER,
+                </h2>
+
+                <div class="letter-heart">♡</div>
+
+                <div class="letter-text">
+
+                    <p>
+                        I don't even know how to put everything
+                        I feel into words, but I'll try...
+                    </p>
+
+                    <p>
+                        You're not just someone I like,
+                        you're someone I truly care about.
+                        You make my days brighter, my thoughts lighter,
+                        and my heart feel at peace. I love your smile,
+                        your kindness, the way you laugh,
+                        and even the little things about you.
+                    </p>
+
+                    <p>
+                        I'm so grateful to have you in my life,
+                        and I really hope you feel the same way about me.
+                    </p>
+
+                    <p class="love-declaration">
+                        I love you, HER... always. ♡
+                    </p>
+
+                    <p class="signature">
+                        - Jay
+                    </p>
+
+                </div>
+
+                <!-- MUSIC PLAYER -->
+
+                <div class="music-player" id="musicPlayer">
+
+                    <button
+                        class="play-button"
+                        id="playButton"
+                        aria-label="Play music"
+                    >
+                        <span id="playIcon">▶</span>
+                    </button>
+
+                    <div class="music-details">
+
+                        <div class="song-title">
+                            Photograph — Ed Sheeran
+                        </div>
+
+                        <div class="music-controls">
+
+                            <span class="time" id="currentTime">0:00</span>
+
+                            <input
+                                type="range"
+                                id="progressBar"
+                                min="0"
+                                max="100"
+                                value="0"
+                                aria-label="Music progress"
+                            >
+
+                            <span class="time" id="duration">0:00</span>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="volume-button"
+                        id="volumeButton"
+                        aria-label="Mute or unmute music"
+                    >
+                        <span id="volumeIcon">🔊</span>
+                    </button>
+
+                    <audio id="loveSong" preload="metadata">
+                        <source src="music.mp3" type="audio/mpeg">
+                        Your browser does not support audio playback.
+                    </audio>
+
+                </div>
+
+                <p class="bottom-message">
+                    Some people just make life better...<br>
+                    You're one of them. <span>♡</span>
+                </p>
+
+            </div>
+
+
+            <!-- POLAROID PHOTO -->
+
+            <div class="letter-photo">
+
+                <img src="love-polaroid.jpg" alt="A special rose photograph">
+
+                <div class="photo-caption">
+                    You mean<br>
+                    everything<br>
+                    to me<br>
+                    <span>♡</span>
+                </div>
+
+                <div class="photo-hearts">
+                    ♡<br>
+                    ♡
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= NO BUTTON END SCREEN ================= -->
+
+    <section class="page ending-page" id="endPage">
+
+        <div class="ending-content">
+
+            <div class="ending-heart">♡</div>
+
+            <h2>That's okay...</h2>
+
+            <p>
+                Maybe this little surprise<br>
+                wasn't meant for you. ❤️
+            </p>
+
+            <p class="ending-signature">
+                — Jay
+            </p>
+
+            <button class="main-button" id="closeButton">
+                Close this little surprise ♡
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
