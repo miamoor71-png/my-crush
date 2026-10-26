@@ -1,20 +1,16 @@
+
 /* ================= PAGE NAVIGATION ================= */
 
-const pages = [
-    document.getElementById("page1"),
-    document.getElementById("page2"),
-    document.getElementById("page3"),
-    document.getElementById("endPage")
-];
+const pages = document.querySelectorAll(".page");
 
-const audio = document.getElementById("loveSong");
+function showPage(id) {
+    pages.forEach(page => page.classList.remove("active"));
 
-function showPage(pageNumber) {
-    pages.forEach(page => {
-        page.classList.remove("active");
-    });
+    const selectedPage = document.getElementById(id);
 
-    pages[pageNumber - 1].classList.add("active");
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
 
     window.scrollTo({
         top: 0,
@@ -23,218 +19,147 @@ function showPage(pageNumber) {
 }
 
 
-/* ================= PAGE 1 BUTTON ================= */
+/* ================= PAGE BUTTONS ================= */
 
 document.getElementById("startButton").addEventListener("click", () => {
-    showPage(2);
+    showPage("page2");
 });
 
-
-/* ================= BACK BUTTONS ================= */
-
 document.getElementById("backToPage1").addEventListener("click", () => {
-    showPage(1);
+    showPage("page1");
+});
+
+document.getElementById("yesButton").addEventListener("click", () => {
+    showPage("page3");
 });
 
 document.getElementById("backToPage2").addEventListener("click", () => {
-    showPage(2);
+    showPage("page2");
 });
-
-
-/* ================= YES BUTTON ================= */
-
-document.getElementById("yesButton").addEventListener("click", () => {
-    showPage(3);
-});
-
-
-/* ================= NO BUTTON ================= */
-
-/*
-    Clicking NO ends the experience.
-    It does not continue to the love letter.
-*/
 
 document.getElementById("noButton").addEventListener("click", () => {
-
-    audio.pause();
-
-    document.getElementById("playIcon").textContent = "▶";
-
-    showPage(4);
-
+    song.pause();
+    playIcon.textContent = "▶";
+    showPage("endPage");
 });
 
-
-/* ================= CLOSE ENDING ================= */
-
 document.getElementById("closeButton").addEventListener("click", () => {
-
-    audio.pause();
-
-    document.getElementById("playIcon").textContent = "▶";
-
-    // Return to the beginning if she chooses to close the surprise.
-    showPage(1);
-
+    song.pause();
+    playIcon.textContent = "▶";
+    showPage("page1");
 });
 
 
 /* ================= MUSIC PLAYER ================= */
 
+const song = document.getElementById("loveSong");
 const playButton = document.getElementById("playButton");
 const playIcon = document.getElementById("playIcon");
-
 const progressBar = document.getElementById("progressBar");
-
-const currentTimeDisplay = document.getElementById("currentTime");
-const durationDisplay = document.getElementById("duration");
-
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
 const volumeButton = document.getElementById("volumeButton");
 const volumeIcon = document.getElementById("volumeIcon");
 
-
-/* Format seconds into minutes and seconds */
-
 function formatTime(seconds) {
-
     if (!Number.isFinite(seconds) || seconds < 0) {
         return "0:00";
     }
 
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
 
-    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+    return `${mins}:${String(secs).padStart(2, "0")}`;
 }
 
 
-/* Play or pause */
+/* Play and pause */
 
 playButton.addEventListener("click", async () => {
-
-    if (audio.paused) {
-
+    if (song.paused) {
         try {
-
-            await audio.play();
-
-            playIcon.textContent = "Ⅱ";
-
+            await song.play();
+            playIcon.textContent = "❚❚";
         } catch (error) {
-
-            playIcon.textContent = "▶";
+            console.error("Music playback failed:", error);
 
             alert(
-                "The song could not play. Make sure music.mp3 is uploaded to your GitHub repository."
+                "The song could not play. Check that music.mp3 is a valid audio file and is uploaded correctly."
             );
-
         }
-
     } else {
-
-        audio.pause();
-
+        song.pause();
         playIcon.textContent = "▶";
-
     }
-
 });
 
 
-/* Update the duration when the file loads */
+/* Load song duration */
 
-audio.addEventListener("loadedmetadata", () => {
-
-    durationDisplay.textContent = formatTime(audio.duration);
-
+song.addEventListener("loadedmetadata", () => {
+    duration.textContent = formatTime(song.duration);
 });
 
 
-/* Update the progress bar while playing */
+/* Update playback progress */
 
-audio.addEventListener("timeupdate", () => {
+song.addEventListener("timeupdate", () => {
+    currentTime.textContent = formatTime(song.currentTime);
 
-    currentTimeDisplay.textContent = formatTime(audio.currentTime);
-
-    if (Number.isFinite(audio.duration) && audio.duration > 0) {
-
-        progressBar.value =
-            (audio.currentTime / audio.duration) * 100;
-
+    if (Number.isFinite(song.duration) && song.duration > 0) {
+        progressBar.value = (song.currentTime / song.duration) * 100;
     }
-
 });
 
 
-/* Allow the user to move through the song */
+/* Seek through the song */
 
 progressBar.addEventListener("input", () => {
-
-    if (Number.isFinite(audio.duration) && audio.duration > 0) {
-
-        audio.currentTime =
-            (Number(progressBar.value) / 100) * audio.duration;
-
+    if (Number.isFinite(song.duration) && song.duration > 0) {
+        song.currentTime = (Number(progressBar.value) / 100) * song.duration;
     }
-
 });
 
 
-/* Change the play button when the song is paused */
+/* Keep play icon synchronized */
 
-audio.addEventListener("pause", () => {
-
+song.addEventListener("pause", () => {
     playIcon.textContent = "▶";
+});
 
+song.addEventListener("play", () => {
+    playIcon.textContent = "❚❚";
 });
 
 
-/* Change the play button when playback starts */
+/* Reset player when song ends */
 
-audio.addEventListener("play", () => {
-
-    playIcon.textContent = "Ⅱ";
-
-});
-
-
-/* Reset the player when the song ends */
-
-audio.addEventListener("ended", () => {
-
+song.addEventListener("ended", () => {
     playIcon.textContent = "▶";
-
     progressBar.value = 0;
-
-    currentTimeDisplay.textContent = "0:00";
-
+    currentTime.textContent = "0:00";
 });
 
 
-/* Mute or unmute */
+/* Mute and unmute */
 
 volumeButton.addEventListener("click", () => {
-
-    audio.muted = !audio.muted;
-
-    volumeIcon.textContent = audio.muted ? "🔇" : "🔊";
-
+    song.muted = !song.muted;
+    volumeIcon.textContent = song.muted ? "🔇" : "🔊";
 });
 
 
-/* ================= FLOATING HEARTS ================= */
+/* ================= FLOATING HEART EFFECT ================= */
 
-const heartContainer = document.getElementById("floatingHearts");
+const heartsContainer = document.getElementById("floatingHearts");
 
 const heartCharacters = ["♥", "♡", "❤"];
 
 function createHeart() {
+    if (!heartsContainer) return;
 
-    // Avoid creating too many hearts.
-    if (heartContainer.childElementCount > 16) {
-        return;
-    }
+    // Keep the number of hearts under control.
+    if (heartsContainer.childElementCount >= 18) return;
 
     const heart = document.createElement("span");
 
@@ -244,20 +169,25 @@ function createHeart() {
         heartCharacters[Math.floor(Math.random() * heartCharacters.length)];
 
     heart.style.left = `${Math.random() * 100}%`;
-
     heart.style.fontSize = `${12 + Math.random() * 15}px`;
-
     heart.style.animationDuration = `${5 + Math.random() * 4}s`;
 
-    heartContainer.appendChild(heart);
+    heartsContainer.appendChild(heart);
 
     heart.addEventListener("animationend", () => {
         heart.remove();
     });
-
 }
 
 
-/* Create hearts periodically */
+/* Create hearts continuously */
 
-setInterval(createHeart, 700);
+if (heartsContainer) {
+    // Add some hearts immediately.
+    for (let i = 0; i < 12; i++) {
+        createHeart();
+    }
+
+    // Add more hearts over time.
+    setInterval(createHeart, 700);
+}
