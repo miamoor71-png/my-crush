@@ -1,0 +1,961 @@
+/* ================= GENERAL SETTINGS ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff6f9f;
+    --light-pink: #ff8eb5;
+    --dark: #100b10;
+    --white: #fff3f6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+}
+
+.page {
+    display: none;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.page.active {
+    display: flex;
+    animation: pageAppear 0.7s ease;
+}
+
+@keyframes pageAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* ================= PAGE 1 ================= */
+
+.hero-page {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12, 7, 15, 0.35),
+            rgba(18, 7, 17, 0.08),
+            rgba(12, 7, 15, 0.35)
+        ),
+        url("sunset.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15, 5, 16, 0.12),
+            rgba(14, 5, 14, 0.05) 45%,
+            rgba(5, 3, 8, 0.55)
+        );
+
+    pointer-events: none;
+}
+
+.little-note {
+    position: absolute;
+    top: 7%;
+    left: 4.5%;
+
+    font-family: "Caveat", cursive;
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.15;
+
+    color: #ffe6ed;
+    transform: rotate(-4deg);
+
+    z-index: 2;
+}
+
+.little-note span {
+    color: var(--pink);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+
+    text-align: center;
+    padding: 40px 20px;
+
+    animation: contentAppear 1s ease;
+}
+
+@keyframes contentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-title {
+    font-family: "Caveat", cursive;
+    font-weight: 500;
+
+    font-size: clamp(52px, 8vw, 82px);
+    line-height: 1.1;
+
+    color: #fff0f5;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+}
+
+.main-title span {
+    color: #ff77a8;
+}
+
+.hero-subtitle {
+    margin-top: 10px;
+
+    font-family: "Caveat", cursive;
+    font-size: clamp(17px, 2.2vw, 23px);
+
+    color: #ffe6ed;
+}
+
+.tiny-heart {
+    margin: 20px auto 24px;
+
+    font-size: 22px;
+    color: #ff8ab1;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.main-button {
+    border: none;
+    border-radius: 40px;
+
+    padding: 15px 31px;
+    min-width: 200px;
+
+    background: linear-gradient(
+        135deg,
+        #ff80ab,
+        #ff568e
+    );
+
+    color: #29111d;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow: 0 8px 28px rgba(255, 79, 137, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.main-button span {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.main-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 35px rgba(255, 79, 137, 0.4);
+}
+
+.hero-polaroid {
+    position: absolute;
+    z-index: 2;
+
+    top: 17%;
+    right: 6%;
+
+    width: clamp(145px, 17vw, 210px);
+
+    padding: 10px 10px 5px;
+
+    background: #f6e0d9;
+
+    transform: rotate(7deg);
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+
+    color: #25141a;
+}
+
+.hero-polaroid::before {
+    content: "";
+    position: absolute;
+
+    width: 45%;
+    height: 20px;
+
+    top: -11px;
+    left: 28%;
+
+    background: rgba(215, 189, 150, 0.65);
+
+    transform: rotate(-8deg);
+}
+
+.hero-polaroid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    display: block;
+    object-fit: cover;
+}
+
+.hero-polaroid p {
+    padding: 7px 0 5px;
+
+    text-align: center;
+
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+}
+
+.hero-flowers {
+    position: absolute;
+
+    bottom: -12%;
+    left: -4%;
+
+    width: min(40%, 430px);
+
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+
+/* ================= PAGE 2 ================= */
+
+.question-page {
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(72, 22, 40, 0.18),
+            transparent 65%
+        ),
+        linear-gradient(
+            135deg,
+            #171116,
+            #0d0a0e 70%
+        );
+}
+
+.question-roses {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0.17;
+    filter: blur(1px);
+
+    pointer-events: none;
+}
+
+.back-button {
+    position: absolute;
+    z-index: 5;
+
+    top: 22px;
+    left: 28px;
+
+    border: none;
+    background: transparent;
+
+    color: #eee2e8;
+    font-size: 14px;
+
+    transition: color 0.2s ease;
+}
+
+.back-button:hover {
+    color: var(--pink);
+}
+
+.question-content {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+.question-title {
+    font-size: clamp(21px, 3vw, 27px);
+    font-weight: 600;
+    color: #fff2f5;
+}
+
+.question-content h2 {
+    margin-top: 0;
+
+    font-family: "Caveat", cursive;
+    font-size: clamp(43px, 6vw, 58px);
+    font-weight: 500;
+
+    color: var(--pink);
+}
+
+.question-heart {
+    margin: 6px 0 20px;
+
+    font-family: "Caveat", cursive;
+    font-size: 30px;
+    color: var(--pink);
+}
+
+.answer-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.yes-button,
+.no-button {
+    min-width: 135px;
+    padding: 12px 20px;
+
+    border-radius: 40px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.yes-button {
+    border: 1px solid var(--pink);
+
+    background: var(--pink);
+    color: #251018;
+}
+
+.no-button {
+    border: 1px solid #aaa0a7;
+
+    background: rgba(0, 0, 0, 0.12);
+    color: white;
+}
+
+.yes-button:hover,
+.no-button:hover {
+    transform: translateY(-3px);
+}
+
+.no-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ================= PAGE 3 ================= */
+
+.letter-page {
+    align-items: center;
+    justify-content: center;
+
+    padding: 100px 5% 45px;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 40%,
+            rgba(68, 21, 41, 0.32),
+            transparent 65%
+        ),
+        linear-gradient(
+            135deg,
+            #170d14,
+            #0e0a0e 75%
+        );
+}
+
+.letter-roses {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0.13;
+    pointer-events: none;
+}
+
+.letter-layout {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1050px;
+
+    display: grid;
+
+    grid-template-columns: 1.15fr 0.85fr;
+
+    align-items: center;
+    gap: 50px;
+}
+
+.letter-content {
+    text-align: center;
+}
+
+.letter-heading {
+    font-family: "Caveat", cursive;
+
+    font-size: clamp(36px, 5vw, 48px);
+    font-weight: 500;
+
+    color: var(--pink);
+}
+
+.letter-heart {
+    margin: 0 0 12px;
+
+    font-size: 26px;
+    color: var(--pink);
+}
+
+.letter-text {
+    font-size: 14px;
+    line-height: 1.75;
+
+    color: #f1dce5;
+}
+
+.letter-text p {
+    margin-bottom: 15px;
+}
+
+.love-declaration {
+    margin-top: 22px !important;
+    margin-bottom: 5px !important;
+
+    font-family: "Caveat", cursive;
+    font-size: clamp(23px, 3vw, 29px);
+    font-weight: 600;
+
+    color: var(--pink);
+}
+
+.signature {
+    font-family: "Caveat", cursive;
+    font-size: 23px;
+}
+
+
+/* ================= ROSE PHOTO ================= */
+
+.letter-photo {
+    position: relative;
+
+    width: 100%;
+    max-width: 310px;
+
+    justify-self: center;
+
+    padding: 9px 9px 12px;
+
+    background: #f5e4dc;
+
+    transform: rotate(4deg);
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.letter-photo > img {
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 3 / 4;
+
+    object-fit: cover;
+}
+
+.photo-caption {
+    position: absolute;
+
+    right: 16%;
+    bottom: 8%;
+
+    padding: 13px 17px;
+
+    background: #e9c7b5;
+    color: #36221f;
+
+    font-family: "Caveat", cursive;
+    font-size: 22px;
+
+    line-height: 1.05;
+    text-align: center;
+
+    transform: rotate(-5deg);
+
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.photo-caption span {
+    color: #8f314a;
+}
+
+.photo-hearts {
+    position: absolute;
+
+    top: 18%;
+    right: -45px;
+
+    font-family: "Caveat", cursive;
+    font-size: 42px;
+    line-height: 1.1;
+
+    color: var(--pink);
+
+    transform: rotate(12deg);
+}
+
+
+/* ================= MUSIC PLAYER ================= */
+
+.music-player {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    max-width: 450px;
+
+    margin: 24px auto 0;
+
+    padding: 7px 13px 7px 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 50px;
+
+    background: rgba(28, 24, 31, 0.93);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    gap: 12px;
+}
+
+.play-button {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--pink);
+    color: #28101b;
+
+    font-size: 17px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.play-button:hover {
+    transform: scale(1.07);
+    background: #ff94b9;
+}
+
+#playIcon {
+    display: inline-block;
+    transform: translateX(1px);
+}
+
+.music-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-title {
+    margin-bottom: 5px;
+
+    color: #fff0f5;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: left;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.time {
+    flex-shrink: 0;
+
+    color: #ddd0d8;
+
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+#progressBar {
+    flex: 1;
+
+    width: 100%;
+    min-width: 30px;
+    height: 4px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 10px;
+
+    background: #61565f;
+
+    cursor: pointer;
+}
+
+#progressBar::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+    background: var(--pink);
+}
+
+#progressBar::-moz-range-thumb {
+    width: 8px;
+    height: 8px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--pink);
+}
+
+#progressBar::-moz-range-progress {
+    background: var(--pink);
+    height: 4px;
+    border-radius: 10px;
+}
+
+.volume-button {
+    flex-shrink: 0;
+
+    border: none;
+    background: transparent;
+
+    color: white;
+
+    font-size: 15px;
+    padding: 5px;
+}
+
+.volume-button:hover {
+    opacity: 0.7;
+}
+
+
+/* ================= BOTTOM MESSAGE ================= */
+
+.bottom-message {
+    margin-top: 28px;
+
+    font-size: 12px;
+    line-height: 1.9;
+
+    color: #e8cbd7;
+}
+
+.bottom-message span {
+    color: var(--pink);
+    font-size: 18px;
+}
+
+
+/* ================= ENDING PAGE ================= */
+
+.ending-page {
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(105, 27, 55, 0.25),
+            transparent 65%
+        ),
+        #100b10;
+}
+
+.ending-content {
+    text-align: center;
+}
+
+.ending-heart {
+    margin-bottom: 10px;
+
+    color: var(--pink);
+    font-family: "Caveat", cursive;
+    font-size: 70px;
+}
+
+.ending-content h2 {
+    font-family: "Caveat", cursive;
+    font-size: 48px;
+    font-weight: 500;
+
+    color: var(--pink);
+}
+
+.ending-content p {
+    margin-top: 15px;
+
+    color: #f3dce5;
+    line-height: 1.8;
+}
+
+.ending-signature {
+    font-family: "Caveat", cursive;
+    font-size: 24px;
+}
+
+.ending-content .main-button {
+    margin-top: 25px;
+}
+
+
+/* ================= FLOATING HEARTS ================= */
+
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+
+    z-index: 4;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -35px;
+
+    color: var(--pink);
+
+    opacity: 0;
+
+    font-size: 18px;
+
+    animation: floatUp 7s linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.7);
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(35deg) scale(1.2);
+    }
+}
+
+
+/* ================= MOBILE RESPONSIVENESS ================= */
+
+@media (max-width: 700px) {
+
+    .hero-page {
+        min-height: 100svh;
+    }
+
+    .hero-content {
+        padding: 30px 15px;
+        transform: translateY(-10px);
+    }
+
+    .hero-polaroid {
+        top: 9%;
+        right: 4%;
+
+        width: 105px;
+        padding: 5px 5px 3px;
+    }
+
+    .hero-polaroid p {
+        font-size: 13px;
+        padding: 3px 0;
+    }
+
+    .little-note {
+        top: 6%;
+        left: 4%;
+
+        font-size: 16px;
+    }
+
+    .hero-flowers {
+        width: 60%;
+        bottom: -4%;
+        left: -10%;
+    }
+
+    .question-page {
+        min-height: 100svh;
+    }
+
+    .back-button {
+        top: 22px;
+        left: 18px;
+    }
+
+    .question-content {
+        padding: 70px 15px;
+    }
+
+    .yes-button,
+    .no-button {
+        min-width: 115px;
+        padding: 12px 15px;
+    }
+
+    .letter-page {
+        padding: 90px 20px 35px;
+    }
+
+    .letter-layout {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+        max-width: 450px;
+    }
+
+    .letter-content {
+        order: 1;
+    }
+
+    .letter-photo {
+        order: 2;
+        width: 65%;
+        max-width: 240px;
+    }
+
+    .photo-hearts {
+        right: -30px;
+        font-size: 32px;
+    }
+
+    .letter-text {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .music-player {
+        gap: 8px;
+        padding-right: 9px;
+    }
+
+    .play-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .time {
+        font-size: 9px;
+    }
+
+    .bottom-message {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+  }
